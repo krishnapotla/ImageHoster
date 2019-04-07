@@ -104,6 +104,7 @@ public class ImageController {
         model.addAttribute("comments", image.getComments());
         if (user.getId() != image.getUser().getId()) {
             String error = "Only the owner of the image can edit the image";
+            model.addAttribute("tags", image.getTags());
             model.addAttribute("editError", error);
             return "images/image";
         }
@@ -154,9 +155,8 @@ public class ImageController {
         Image image = imageService.getImage(imageId);
         if (user.getId() != image.getUser().getId()) {
             String message = "Only the owner of the image can delete the image";
-            String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
-            model.addAttribute("tags", tags);
+            model.addAttribute("tags", image.getTags());
             model.addAttribute("comments", image.getComments());
             model.addAttribute("deleteError", message);
             return "images/image";

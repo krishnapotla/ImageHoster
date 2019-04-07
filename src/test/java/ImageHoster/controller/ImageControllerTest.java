@@ -79,14 +79,21 @@ public class ImageControllerTest {
 
         session = new MockHttpSession();
         session.setAttribute("loggeduser", user);
+        Tag tag = new Tag();
+        tag.setId(1);
+        tag.setName("dog");
+
+        List<Tag> tags = new ArrayList<>();
+        tags.add(tag);
 
         Image image = new Image();
         image.setId(1);
         image.setTitle("new");
         image.setDescription("This image is for testing purpose");
         image.setUser(user);
+        image.setTags(tags);
 
-        Mockito.when(imageService.getImage(Mockito.anyInt())).thenReturn(image);
+        Mockito.when(imageService.getImageByTitle(Mockito.anyInt(), Mockito.anyString())).thenReturn(image);
 
         this.mockMvc.perform(get("/images/1/new").session(session))
                 .andExpect(view().name("images/image"))
@@ -214,16 +221,24 @@ public class ImageControllerTest {
         userProfile.setEmailAddress("p@gmail.com");
         userProfile.setFullName("Prerna");
         userProfile.setMobileNumber("9876543210");
-        user.setProfile(userProfile1);
-        user.setId(2);
-        user.setUsername("Prerna");
-        user.setPassword("password1@@");
+        user1.setProfile(userProfile1);
+        user1.setId(2);
+        user1.setUsername("Prerna");
+        user1.setPassword("password1@@");
+
+        Tag tag = new Tag();
+        tag.setId(1);
+        tag.setName("dog");
+
+        List<Tag> tags = new ArrayList<>();
+        tags.add(tag);
 
         Image image = new Image();
         image.setId(1);
         image.setTitle("new");
         image.setDescription("This image is for testing purpose");
         image.setUser(user1);
+        image.setTags(tags);
 
 
         Mockito.when(imageService.getImage(Mockito.anyInt())).thenReturn(image);
@@ -289,10 +304,10 @@ public class ImageControllerTest {
         userProfile.setEmailAddress("p@gmail.com");
         userProfile.setFullName("Prerna");
         userProfile.setMobileNumber("9876543210");
-        user.setProfile(userProfile1);
-        user.setId(2);
-        user.setUsername("Prerna");
-        user.setPassword("password1@@");
+        user1.setProfile(userProfile1);
+        user1.setId(2);
+        user1.setUsername("Prerna");
+        user1.setPassword("password1@@");
 
         Image image = new Image();
         image.setId(1);
