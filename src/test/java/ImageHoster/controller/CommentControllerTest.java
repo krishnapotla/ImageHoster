@@ -57,7 +57,7 @@ public class CommentControllerTest {
         image.setTitle("new");
         image.setDescription("This image is for testing purpose");
 
-        Mockito.when(imageService.getImage(Mockito.anyInt())).thenReturn(image);
+        Mockito.when(imageService.getImageByTitle(Mockito.anyInt(), Mockito.anyString())).thenReturn(image);
 
         this.mockMvc.perform(post("/image/1/new/comments")
                 .param("comment", "This comment is for testing purpose")
