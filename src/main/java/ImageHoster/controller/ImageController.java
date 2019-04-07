@@ -50,6 +50,7 @@ public class ImageController {
         Image image = imageService.getImageByTitle(id, title);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("comments", image.getComments());
         return "images/image";
     }
 
@@ -100,6 +101,7 @@ public class ImageController {
         String tags = convertTagsToString(image.getTags());
         model.addAttribute("image", image);
         model.addAttribute("tags", tags);
+        model.addAttribute("comments", image.getComments());
         if (user.getId() != image.getUser().getId()) {
             String error = "Only the owner of the image can edit the image";
             model.addAttribute("editError", error);
@@ -150,11 +152,12 @@ public class ImageController {
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId, Model model, HttpSession session) {
         User user = (User) session.getAttribute("loggeduser");
         Image image = imageService.getImage(imageId);
-        if(user.getId() != image.getUser().getId()) {
-            String message= "Only the owner of the image can delete the image";
+        if (user.getId() != image.getUser().getId()) {
+            String message = "Only the owner of the image can delete the image";
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
             model.addAttribute("tags", tags);
+            model.addAttribute("comments", image.getComments());
             model.addAttribute("deleteError", message);
             return "images/image";
         }
