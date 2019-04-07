@@ -32,4 +32,31 @@ public class UserService {
         }
     }
 
+    //validate the password. if it contain atleast 1 alphabet, 1 number & 1 special character then return true otherwise false
+    public boolean validatePassword(String password) {
+        boolean isValid = false;
+        boolean numberPrasent = false;
+        boolean letterPrasent = false;
+        boolean specialCharPresent = false;
+        if (null == password) {
+            return false;
+        }
+
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isAlphabetic(password.charAt(i))) {
+                letterPrasent = true;
+            } else if (Character.isDigit(password.charAt(i))) {
+                numberPrasent = true;
+            } else {
+                specialCharPresent = true;
+            }
+        }
+        if (numberPrasent && letterPrasent && specialCharPresent) {
+            isValid = true;
+        }
+
+
+        return isValid;
+    }
+
 }
