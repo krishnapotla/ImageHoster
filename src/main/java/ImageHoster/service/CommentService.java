@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
+
     //Call the postComment() method in the CommentRepository class to persist the comment record in the database
-    public void postComment(Comment post){
+    public void postComment(Comment post) {
 
         commentRepository.postComment(post);
 
